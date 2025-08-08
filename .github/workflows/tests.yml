@@ -21,7 +21,9 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-
+      - name: Install libs
+        run: brew install unixodbc
+        
       - name: Get liblz4 directory
         id: lz4
         run: |
