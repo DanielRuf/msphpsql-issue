@@ -1,0 +1,15 @@
+{
+    "name": "jasonvarga/msphpsql-issue",
+    "autoload": {
+        "psr-4": {
+            "Jasonvarga\\MsphpsqlIssue\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Jason Varga",
+            "email": "jason@pixelfear.com"
+        }
+    ],
+    "require": {}
+}
