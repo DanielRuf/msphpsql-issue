@@ -1,0 +1,41 @@
+name: Run Tests
+
+on:
+  push:
+
+jobs:
+  php-tests:
+    runs-on: ${{ matrix.os }}
+
+    strategy:
+      matrix:
+        php: [8.4]
+        os: [ubuntu-latest]
+
+    name: P${{ matrix.php }} - ${{ matrix.os }}
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ matrix.php }}
+          extensions: fileinfo, exif, gd, pdo, sqlite, pdo_sqlite
+          ini-values: short_open_tag=on
+          coverage: none
+
+      - name: Install dependencies
+        uses: nick-invision/retry@v3
+        with:
+          timeout_minutes: 5
+          max_attempts: 5
+          command: |
+            composer update --no-interaction
+
+      - name: List Installed Dependencies
+        run: composer show -D
+
+      - name: Execute tests
+        run: vendor/bin/phpunit
