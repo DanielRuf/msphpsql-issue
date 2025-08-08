@@ -22,7 +22,7 @@ jobs:
         uses: shivammathur/setup-php@v2
         with:
           php-version: ${{ matrix.php }}
-          extensions: fileinfo, exif, gd, pdo, sqlite, pdo_sqlite
+          extensions: sqlsrv
           ini-values: short_open_tag=on
           coverage: none
 
