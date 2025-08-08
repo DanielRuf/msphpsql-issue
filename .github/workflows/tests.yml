@@ -12,7 +12,7 @@ jobs:
         php: [8.4]
         os: [ubuntu-latest]
         extensions:
-          - none, mbstring, curl, dom, xml, xmlwriter, tokenizer
+          - none, mbstring, curl, dom, xml, xmlwriter, tokenizer, ctype
           - sqlsrv
 
     name: P${{ matrix.php }} - ${{ matrix.os }} - ${{ matrix.extensions }}
