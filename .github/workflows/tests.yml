@@ -12,8 +12,8 @@ jobs:
         php: [8.4]
         os: [ubuntu-latest]
         extensions:
-          - json
-          - json,sqlsrv
+          - none
+          - sqlsrv
 
     name: P${{ matrix.php }} - ${{ matrix.os }} - ${{ matrix.extensions }}
 
