@@ -39,6 +39,7 @@ jobs:
           ini-values: short_open_tag=on
           coverage: none
         env:
+          SQLSRV_CONFIGURE_OPTS: CXXFLAGS="-I/opt/homebrew/opt/unixodbc/include/" LDFLAGS="-L/opt/homebrew/lib/"
           SQLSRV_LINUX_LIBS: unixodbc-dev
           SQLSRV_DARWIN_LIBS: unixodbc
 
