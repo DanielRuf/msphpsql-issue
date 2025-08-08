@@ -24,13 +24,13 @@ jobs:
       - name: Install libs
         run: brew install unixodbc
         
-      - name: Get liblz4 directory
-        id: lz4
+      - name: Get unixodbc directory
+        id: unixodbc
         run: |
           if [ "$(uname -s)" = "Linux" ]; then
-            echo "lz4_dir=/usr" >> "$GITHUB_OUTPUT"
+            echo "unixodbc_dir=/usr" >> "$GITHUB_OUTPUT"
           else
-            echo "lz4_dir=$(brew --prefix)/opt/lz4" >> "$GITHUB_OUTPUT"
+            echo "unixodbc_dir=$(brew --prefix)/opt/unixodbc" >> "$GITHUB_OUTPUT"
           fi
 
       - name: Setup PHP
