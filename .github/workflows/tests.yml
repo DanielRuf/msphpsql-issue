@@ -13,7 +13,7 @@ jobs:
         os: [macos-latest]
         extensions:
           - none, mbstring, curl, dom, xml, xmlwriter, tokenizer, ctype
-          - sqlsrv
+          - sqlsrv-5.12.0
 
     name: P${{ matrix.php }} - ${{ matrix.os }} - ${{ matrix.extensions }}
 
