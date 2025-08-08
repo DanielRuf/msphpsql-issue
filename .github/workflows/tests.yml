@@ -9,7 +9,7 @@ jobs:
 
     strategy:
       matrix:
-        php: [8.3.4]
+        php: [8.2]
         os: [macos-latest]
         extensions:
           - none, mbstring, curl, dom, xml, xmlwriter, tokenizer, ctype
