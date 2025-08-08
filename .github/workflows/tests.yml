@@ -10,7 +10,7 @@ jobs:
     strategy:
       matrix:
         php: [8.4]
-        os: [ubuntu-latest]
+        os: [ubuntu-latest, macos-latest]
         extensions:
           - none, mbstring, curl, dom, xml, xmlwriter, tokenizer, ctype
           - sqlsrv
