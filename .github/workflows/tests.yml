@@ -9,30 +9,18 @@ jobs:
 
     strategy:
       matrix:
-        php: [8.4.1]
+        php: [8.3.4]
         os: [macos-latest]
         extensions:
           - none, mbstring, curl, dom, xml, xmlwriter, tokenizer, ctype
-          - sqlsrv-5.10.0
+          - sqlsrv
 
     name: P${{ matrix.php }} - ${{ matrix.os }} - ${{ matrix.extensions }}
 
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
-
-      - name: Install libs
-        run: brew install unixodbc
         
-      - name: Get unixodbc directory
-        id: unixodbc
-        run: |
-          if [ "$(uname -s)" = "Linux" ]; then
-            echo "unixodbc_dir=/usr" >> "$GITHUB_OUTPUT"
-          else
-            echo "unixodbc_dir=$(brew --prefix)/opt/unixodbc" >> "$GITHUB_OUTPUT"
-          fi
-
       - name: Setup PHP
         uses: shivammathur/setup-php@verbose
         with:
@@ -40,10 +28,6 @@ jobs:
           extensions: ${{ matrix.extensions }}
           ini-values: short_open_tag=on
           coverage: none
-        env:
-          SQLSRV_CONFIGURE_OPTS: CXXFLAGS="-I/opt/homebrew/opt/unixodbc/include/" LDFLAGS="-L/opt/homebrew/lib/"
-          SQLSRV_LINUX_LIBS: unixodbc-dev
-          SQLSRV_DARWIN_LIBS: unixodbc
 
       - name: Install dependencies
         uses: nick-invision/retry@v3
