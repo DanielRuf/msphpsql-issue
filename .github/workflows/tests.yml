@@ -22,7 +22,7 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Install libs
-        run: brew install unixodbc-dev
+        run: brew install unixodbc
 
       - name: Setup PHP
         uses: shivammathur/setup-php@verbose
