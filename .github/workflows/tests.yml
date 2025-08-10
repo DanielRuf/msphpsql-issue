@@ -18,6 +18,9 @@ jobs:
     name: P${{ matrix.php }} - ${{ matrix.os }} - ${{ matrix.extensions }}
 
     steps:
+      - name: Check LC_ALL
+        run: echo "$LC_ALL"
+        
       - name: Checkout code
         uses: actions/checkout@v4
 
@@ -28,7 +31,10 @@ jobs:
           extensions: ${{ matrix.extensions }}
           ini-values: short_open_tag=on
           coverage: none
-
+          
+      - name: Check LC_ALL
+        run: echo "$LC_ALL"
+        
       - name: Install dependencies
         uses: nick-invision/retry@v3
         with:
