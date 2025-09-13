@@ -29,11 +29,17 @@ jobs:
         with:
           php-version: ${{ matrix.php }}
           extensions: ${{ matrix.extensions }}
-          ini-values: short_open_tag=on
+          ini-values: short_open_tag=on, sqlsrv.SetLocaleInfo=0, pdo_sqlsrv.set_locale_info=0
           coverage: none
           
-      - name: Check LC_ALL
-        run: echo "$LC_ALL"
+      - name: Check PHP Configuration
+        run: |
+          echo "LC_ALL environment: $LC_ALL"
+          php -i | grep -E "(sqlsrv|pdo_sqlsrv)" || echo "No sqlsrv configuration found"
+          php -m | grep -E "(sqlsrv|pdo_sqlsrv)" || echo "No sqlsrv extensions found"
+          php -r "echo 'sqlsrv.SetLocaleInfo: ' . ini_get('sqlsrv.SetLocaleInfo') . PHP_EOL;"
+          php -r "echo 'pdo_sqlsrv.set_locale_info: ' . ini_get('pdo_sqlsrv.set_locale_info') . PHP_EOL;"
+          php -r "echo 'Current locale: ' . setlocale(LC_ALL, 0) . PHP_EOL;"
         
       - name: Install dependencies
         uses: nick-invision/retry@v3
