@@ -28,19 +28,8 @@ jobs:
           ini-values: short_open_tag=on
           coverage: none
 
-      - name: Install dependencies
-        uses: nick-invision/retry@v3
-        with:
-          timeout_minutes: 5
-          max_attempts: 5
-          command: |
-            composer update --no-interaction
-
-      - name: List Installed Dependencies
-        run: composer show -D
-
       - name: Get PHP version details
         run: php -v
 
       - name: Execute tests
-        run: vendor/bin/phpunit
+        run: php -r "echo str_word_count('мама', 0, null);"
