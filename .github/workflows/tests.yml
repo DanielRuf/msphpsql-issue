@@ -36,3 +36,6 @@ jobs:
 
       - name: Execute tests
         run: php -r "echo str_word_count('мама', 0, null);"
+
+      - name: Get locale settings
+        run: php -r "echo setlocale(LC_ALL, 0);"
