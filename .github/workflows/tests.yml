@@ -20,6 +20,9 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
+      - name: Check LC_ALL
+        run: echo "$LC_ALL"
+
       - name: Setup PHP
         uses: shivammathur/setup-php@v2
         with:
