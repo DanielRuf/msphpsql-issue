@@ -11,12 +11,14 @@ When the `sqlsrv` or `pdo_sqlsrv` PHP extensions are loaded on macOS, they chang
 ### Symptoms
 
 - `str_word_count('мама', 0, null)` returns `4` instead of the expected `0` when sqlsrv extension is loaded on macOS
-- The issue is **macOS-specific** - Windows and Linux are not affected
+- The issue is **macOS-specific** - Windows and Linux are not affected  
 - The problem occurs because the extension changes locale settings on load
 
-### Root Cause
+### Root Cause Analysis
 
-The sqlsrv extensions have built-in locale handling that automatically sets locale information based on the system environment. On macOS, where `LC_ALL` is typically set to `en_US.UTF-8`, this causes the extension to modify locale settings in a way that affects other PHP functions.
+The sqlsrv extensions have built-in locale handling that automatically sets locale information based on the system environment. On macOS, this interacts with the system's default `LC_ALL=en_US.UTF-8` setting to modify PHP's locale behavior.
+
+**Key Finding**: The underlying issue is that macOS environments (including GitHub Actions) have inherent locale differences compared to Linux/Ubuntu that affect `str_word_count()` behavior with non-ASCII text. The sqlsrv extension can exacerbate this problem by changing locale settings.
 
 ## Solution
 
