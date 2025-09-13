@@ -10,7 +10,7 @@ jobs:
     strategy:
       matrix:
         php: [8.4]
-        os: [ubuntu-latest, macos-15]
+        os: [ubuntu-latest, macos-14, macos-15]
         extensions:
           - none, mbstring, curl, dom, xml, xmlwriter, tokenizer, ctype
 
@@ -38,6 +38,9 @@ jobs:
 
       - name: List Installed Dependencies
         run: composer show -D
+
+      - name: Get PHP version details
+        run: php -v
 
       - name: Execute tests
         run: vendor/bin/phpunit
