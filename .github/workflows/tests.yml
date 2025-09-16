@@ -39,3 +39,6 @@ jobs:
 
       - name: Get locale settings
         run: php -r "echo setlocale(LC_ALL, 0);"
+
+      - name: Execute tests with C locale
+        run: php -r "setlocale(LC_ALL, 'C'); echo str_word_count('мама', 0, null);"
